@@ -1,8 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reduxPromise from 'redux-promise';
- 
+//import reduxPromise from 'redux-promise';
+import async from './middlewares/async';
+import stateValidator from './middlewares/validator/stateValidator';
 import reducers from './reducers';
 
 const Root = ({ children, initialState = {} }) => {
@@ -10,7 +11,7 @@ const Root = ({ children, initialState = {} }) => {
     const store = createStore(
         reducers, 
         initialState, 
-        applyMiddleware(reduxPromise)
+        applyMiddleware(async, stateValidator)
     );
 
     return (
